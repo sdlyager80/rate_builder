@@ -1,9 +1,16 @@
 export const PERSONAS = {
-  analyst:    { id: 'analyst',    name: 'Sara Hernandez',  role: 'Rate Analyst',          color: '#1B75BB', ini: 'SH' },
-  qa:         { id: 'qa',         name: 'Michael Chen',    role: 'QA / Parallel Rating',  color: '#0f4c75', ini: 'MC' },
-  actuarial:  { id: 'actuarial',  name: 'Jaya Patel',      role: 'Actuarial Reviewer',    color: '#37A526', ini: 'JP' },
-  compliance: { id: 'compliance', name: 'Rachel Davis',    role: 'Compliance Officer',    color: '#F6921E', ini: 'RD' },
-  cab:        { id: 'cab',        name: 'Tom Kowalski',    role: 'Change Advisory Board', color: '#0f4c75', ini: 'TK' },
+  // Workers' Comp personas
+  analyst:       { id: 'analyst',       name: 'Sara Hernandez',  role: 'Rate Analyst',          color: '#1B75BB', ini: 'SH', useCase: 'wc' },
+  qa:            { id: 'qa',            name: 'Michael Chen',    role: 'QA / Parallel Rating',  color: '#0f4c75', ini: 'MC', useCase: 'wc' },
+  actuarial:     { id: 'actuarial',     name: 'Jaya Patel',      role: 'Actuarial Reviewer',    color: '#37A526', ini: 'JP', useCase: 'wc' },
+  compliance:    { id: 'compliance',    name: 'Rachel Davis',    role: 'Compliance Officer',    color: '#F6921E', ini: 'RD', useCase: 'wc' },
+  cab:           { id: 'cab',           name: 'Tom Kowalski',    role: 'Change Advisory Board', color: '#0f4c75', ini: 'TK', useCase: 'wc' },
+  // Life & Annuity personas
+  la_analyst:    { id: 'la_analyst',    name: 'Rachel Torres',   role: 'Rate Analyst',          color: '#1B75BB', ini: 'RT', useCase: 'la' },
+  la_qa:         { id: 'la_qa',         name: 'Michael Green',   role: 'QA Reviewer',           color: '#0f4c75', ini: 'MG', useCase: 'la' },
+  la_actuarial:  { id: 'la_actuarial',  name: 'David Kim',       role: 'Actuarial Reviewer',    color: '#37A526', ini: 'DK', useCase: 'la' },
+  la_compliance: { id: 'la_compliance', name: 'Sarah Mills',     role: 'Compliance Officer',    color: '#F6921E', ini: 'SM', useCase: 'la' },
+  la_cab:        { id: 'la_cab',        name: 'James Fox',       role: 'Change Advisory Board', color: '#0f4c75', ini: 'JF', useCase: 'la' },
 };
 
 export const TASKS = [
@@ -96,7 +103,98 @@ export const INITIAL_AUDIT = [
 
 export const PHASE_ORDER = ['workspace', 'submitted', 'qa_done', 'act_ok', 'comp_ok', 'cab_ok', 'deployed'];
 
+export const LA_STEPS = [
+  { id: 'la_queue',   label: 'My Queue',       icon: 'Dashboard'      },
+  { id: 'la_rules',   label: 'Rate Rules',      icon: 'TableChart'     },
+  { id: 'la_sources', label: 'Rate Sources',    icon: 'AccountBalance' },
+  { id: 'la_impact',  label: 'Impact Analysis', icon: 'TrendingUp'     },
+  { id: 'la_audit',   label: 'Audit Trail',     icon: 'History'        },
+];
+
+export const LA_CLIENTS = [
+  { id: 'EVGN', name: 'Evergreen Life Insurance', states: 53, rules: 54 },
+  { id: 'PNCL', name: 'Pinnacle Financial',       states: 47, rules: 48 },
+  { id: 'SMTM', name: 'Summit Mutual',            states: 38, rules: 41 },
+  { id: 'CTLB', name: 'Coastal Benefits',         states: 29, rules: 31 },
+];
+
+export const LA_RATE_SOURCES = [
+  { id: 'MOODY',    label: "Moody's Baa",             value: 5.67,  prev: 5.51,  changed: true,  overdue: false, source: 'Automated Feed',  lastUpdate: 'Feb 13, 2026 02:15 EST', impacted: 12 },
+  { id: 'TBILL26',  label: '26-Wk Treasury Bill',     value: 3.842, prev: 3.842, changed: false, overdue: false, source: 'U.S. Treasury',   lastUpdate: 'Feb 10, 2026 14:00 EST', impacted: 8  },
+  { id: 'FEDDISC',  label: 'Federal Discount Rate',   value: 2.50,  prev: 2.50,  changed: false, overdue: false, source: 'Federal Reserve', lastUpdate: 'Feb 01, 2026 09:00 EST', impacted: 4  },
+  { id: 'USGSCM',   label: 'U.S. Gov Short-Term CM',  value: 0.09,  prev: 0.09,  changed: false, overdue: false, source: 'U.S. Treasury',   lastUpdate: 'Feb 10, 2026 14:00 EST', impacted: 2  },
+  { id: 'NJCMF',    label: 'NJ Cash Mgmt Fund',       value: 2.50,  prev: 2.50,  changed: false, overdue: true,  source: 'Manual Entry',    lastUpdate: 'Jan 31, 2026 10:00 EST', impacted: 1  },
+  { id: 'PRIME',    label: 'Prime Lending Rate',      value: 4.75,  prev: 4.75,  changed: false, overdue: false, source: 'Federal Reserve', lastUpdate: 'Feb 01, 2026 09:00 EST', impacted: 3  },
+  { id: 'FEDSHORT', label: 'Federal Short-Term Rate', value: 0.14,  prev: 0.14,  changed: false, overdue: false, source: 'Federal Reserve', lastUpdate: 'Feb 01, 2026 09:00 EST', impacted: 2  },
+  { id: 'COMM90',   label: '90-Day Commercial Paper', value: 0.14,  prev: 0.14,  changed: false, overdue: false, source: 'Federal Reserve', lastUpdate: 'Feb 01, 2026 09:00 EST', impacted: 1  },
+];
+
+export const LA_PMI_RULES = [
+  { state: 'AK', iss: 'NO',  ins: 'NO',  ben: 'NO',  grace: null, graceFrom: null, intFrom: null,  plusDays: null, intTo: null,  rateType: null,        rate: null,  altRate: null,       altVal: null,  calc: null,       t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Silent'       },
+  { state: 'AL', iss: 'YES', ins: 'YES', ben: 'YES', grace: 30,   graceFrom: 'POL', intFrom: 'POL', plusDays: 0,   intTo: 'PD', rateType: 'CORPORATE', rate: null,  altRate: null,       altVal: null,  calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Active'       },
+  { state: 'AR', iss: 'YES', ins: 'NO',  ben: 'NO',  grace: 30,   graceFrom: 'POD', intFrom: 'DOD', plusDays: 0,   intTo: 'PD', rateType: 'SPECIFIED', rate: 8.000, altRate: null,       altVal: null,  calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Active'       },
+  { state: 'AZ', iss: 'YES', ins: 'YES', ben: 'YES', grace: 30,   graceFrom: 'POL', intFrom: 'POL', plusDays: 0,   intTo: 'PD', rateType: 'LEGAL',    rate: 10.000,altRate: null,       altVal: null,  calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Active'       },
+  { state: 'CA', iss: 'YES', ins: 'YES', ben: 'YES', grace: 30,   graceFrom: 'DOD', intFrom: 'DOD', plusDays: 0,   intTo: 'PD', rateType: 'CORPORATE', rate: null,  altRate: null,       altVal: null,  calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'N', status: 'Active'       },
+  { state: 'CO', iss: 'YES', ins: 'YES', ben: 'YES', grace: null, graceFrom: null,  intFrom: 'DOD', plusDays: 0,   intTo: 'PD', rateType: 'CORPORATE', rate: null,  altRate: null,       altVal: null,  calc: 'SIMPLE',   t2Days: 30,   t2Penalty: 'FEDDISC+2%',  iic: 'Y', status: 'Active'       },
+  { state: 'FL', iss: 'YES', ins: 'NO',  ben: 'NO',  grace: null, graceFrom: null,  intFrom: 'PD',  plusDays: 20,  intTo: 'PD', rateType: 'MOODY',    rate: 2.800, altRate: 'SPECIFIED', altVal: 12.000,calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'N', status: 'Exception'    },
+  { state: 'GA', iss: 'YES', ins: 'YES', ben: 'YES', grace: 30,   graceFrom: 'DOD', intFrom: 'DOD', plusDays: 0,   intTo: 'PD', rateType: 'CORPORATE', rate: null,  altRate: 'SPECIFIED', altVal: 6.000, calc: 'SIMPLE',   t2Days: 30,   t2Penalty: 'SPEC 12.00%', iic: 'Y', status: 'Active'       },
+  { state: 'ID', iss: 'YES', ins: 'YES', ben: 'YES', grace: 30,   graceFrom: 'POD', intFrom: 'POD', plusDays: 180, intTo: 'PD', rateType: 'USGSCM',   rate: 0.090, altRate: 'CORPORATE', altVal: null,  calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Exception'    },
+  { state: 'IL', iss: 'YES', ins: 'YES', ben: 'YES', grace: 31,   graceFrom: 'POL', intFrom: 'DOD', plusDays: 0,   intTo: 'PD', rateType: 'SPECIFIED', rate: 10.000,altRate: null,       altVal: null,  calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Active'       },
+  { state: 'NJ', iss: 'YES', ins: 'YES', ben: 'YES', grace: 60,   graceFrom: 'POL', intFrom: 'POL', plusDays: 61,  intTo: 'PD', rateType: 'NJCMF',    rate: 2.500, altRate: null,       altVal: null,  calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Rate Overdue' },
+  { state: 'NM', iss: 'YES', ins: 'YES', ben: 'YES', grace: 45,   graceFrom: 'POL', intFrom: 'POL', plusDays: 0,   intTo: 'PD', rateType: 'PRIME',    rate: 4.750, altRate: null,       altVal: null,  calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Active'       },
+  { state: 'OH', iss: 'NO',  ins: 'YES', ben: 'NO',  grace: null, graceFrom: null,  intFrom: 'DOD', plusDays: 0,   intTo: 'PD', rateType: 'CORPORATE', rate: null,  altRate: 'FEDSHORT', altVal: 0.140, calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Review'       },
+  { state: 'TN', iss: 'YES', ins: 'NO',  ben: 'NO',  grace: 14,   graceFrom: 'DOD', intFrom: 'DOD', plusDays: 15,  intTo: 'PD', rateType: 'CORPORATE', rate: null,  altRate: null,       altVal: null,  calc: 'COMPOUND', t2Days: null, t2Penalty: null,          iic: 'Y', status: 'Active'       },
+  { state: 'TX', iss: 'YES', ins: 'YES', ben: 'YES', grace: null, graceFrom: null,  intFrom: 'POL', plusDays: 0,   intTo: 'PD', rateType: 'CORPORATE', rate: null,  altRate: null,       altVal: null,  calc: 'SIMPLE',   t2Days: 60,   t2Penalty: 'CORP+18%',    iic: 'Y', status: 'Pending Chg'  },
+  { state: 'MT', iss: 'YES', ins: 'YES', ben: 'YES', grace: 29,   graceFrom: 'POD', intFrom: 'POD', plusDays: 30,  intTo: 'PD', rateType: 'CORPORATE', rate: null,  altRate: 'COMM90',   altVal: 0.140, calc: 'SIMPLE',   t2Days: null, t2Penalty: null,          iic: 'N', status: 'Active'       },
+];
+
+export const LA_QUEUE_TASKS = [
+  { id: 'lq1', priority: 'overdue',  icon: '📋', title: 'NJCMF Rate Verification — Manual Check Required',
+    desc: 'NJ Cash Management Fund monthly rate. Last verified Jan 31 (2.50%). State treasury site needs manual confirmation. Affects all NJ beneficiary residence PMI calcs.',
+    status: '2 Days Overdue', statusType: 'overdue', due: 'Feb 11', actions: ['Verify Rate'] },
+  { id: 'lq2', priority: 'overdue',  icon: '📋', title: 'Q1 Statutory Rate Review — All Jurisdictions',
+    desc: 'Quarterly review: verify all SPECIFIED and LEGAL rate values against current state statutes (AR 8.00%, AZ 10.00%, FL 12.00%, IL 10.00%, KY 12.00%, etc.). Coordinate with Legal team.',
+    status: '3 Days Overdue', statusType: 'overdue', due: 'Feb 10', actions: ['Begin Review'] },
+  { id: 'lq3', priority: 'today',    icon: '🔄', title: "Moody's Baa Rate Change — Review & Submit for Approval",
+    desc: "Automated feed detected change: 5.51% → 5.67% (+0.16%). Impact analysis ready. 12 state rules affected across 3 clients. 47 open claims. Exceeds GAFG auto-threshold — manual review needed.",
+    status: 'Review Required', statusType: 'review', due: 'Today', actions: ['View Impact', 'Submit'] },
+  { id: 'lq4', priority: 'today',    icon: '✏️', title: 'Pinnacle Financial — Corporate Rate Entry (3 Plan Codes)',
+    desc: 'Carrier finance team email received Feb 10. New MOD rates: Plan PF-201 (3.25%→3.50%), Plan PF-305 (3.75%→4.00%), Plan PF-412 (2.80%→3.10%). Effective Feb 1, 2026.',
+    status: 'Manual Entry', statusType: 'manual', due: 'Today', actions: ['Enter Rates'] },
+  { id: 'lq5', priority: 'upcoming', icon: '🔄', title: 'TBILL26 Weekly Refresh — Automated',
+    desc: '26-Week Treasury Bill auction results. Auto-retrieval from U.S. Treasury. Current: 3.842%. Auto-approve threshold: ±0.10%.',
+    status: 'Automated', statusType: 'automated', due: 'Feb 17', actions: [] },
+  { id: 'lq6', priority: 'upcoming', icon: '📋', title: 'TX HB 1472 — Pre-Stage Penalty Rule Change',
+    desc: 'Legislative change: TX Tier 2 penalty trigger from 60 to 45 days (POL). Verified by Legal on Feb 5. Rule change pre-staged, needs final approval before Mar 1 effective date.',
+    status: 'Pre-Staged', statusType: 'prestaged', due: 'Effective Mar 1', actions: ['Review'] },
+];
+
+export const LA_IMPACT_ROWS = [
+  { state: 'AL', rule: 'CORPORATE', clients: 3, claims: 8,  direction: 'up',   est: '+$0.16%',  risk: 'Low'    },
+  { state: 'CA', rule: 'CORPORATE', clients: 3, claims: 11, direction: 'up',   est: '+$0.16%',  risk: 'Low'    },
+  { state: 'CO', rule: 'CORPORATE', clients: 2, claims: 4,  direction: 'up',   est: '+$0.16%',  risk: 'Medium' },
+  { state: 'DE', rule: 'MOODY',     clients: 3, claims: 5,  direction: 'up',   est: '+$0.16%',  risk: 'Low'    },
+  { state: 'FL', rule: 'MOODY',     clients: 2, claims: 3,  direction: 'none', est: 'No Impact', risk: 'None'  },
+  { state: 'GA', rule: 'CORPORATE', clients: 3, claims: 7,  direction: 'up',   est: '+$0.16%',  risk: 'Low'    },
+  { state: 'MN', rule: 'MOODY',     clients: 3, claims: 4,  direction: 'up',   est: '+$0.16%',  risk: 'Low'    },
+  { state: 'OH', rule: 'CORPORATE', clients: 2, claims: 3,  direction: 'up',   est: '+$0.16%',  risk: 'Low'    },
+  { state: 'TX', rule: 'CORPORATE', clients: 3, claims: 2,  direction: 'up',   est: '+$0.16%',  risk: 'Medium' },
+  { state: 'WA', rule: 'MOODY',     clients: 3, claims: 5,  direction: 'up',   est: '+$0.16%',  risk: 'Low'    },
+  { state: 'WI', rule: 'MOODY',     clients: 2, claims: 3,  direction: 'up',   est: '+$0.16%',  risk: 'Low'    },
+  { state: 'WY', rule: 'MOODY',     clients: 1, claims: 1,  direction: 'up',   est: '+$0.16%',  risk: 'Low'    },
+];
+
+export const LA_AUDIT = [
+  { ts: '2026-02-13 06:15', user: 'System',        role: 'Feed Monitor', action: 'Rate Change Detected',  obj: 'MOODY',     det: "Moody's Baa changed: 5.51% → 5.67% (+0.16%). Exceeds GAFG auto-threshold. Manual review queued." },
+  { ts: '2026-02-13 06:15', user: 'System',        role: 'Feed Monitor', action: 'Impact Analysis Run',   obj: 'MOODY',     det: '12 state rules identified. 47 open claims flagged. 3 clients affected (EVGN, PNCL, SMTM).' },
+  { ts: '2026-02-13 09:02', user: 'Rachel Torres', role: 'Rate Analyst', action: 'Queue Item Opened',     obj: 'LQ-0041',   det: "Moody's Baa rate change task opened for review." },
+  { ts: '2026-02-11 10:00', user: 'System',        role: 'Feed Monitor', action: 'Verification Overdue',  obj: 'NJCMF',     det: 'NJCMF monthly verification overdue by 2 days. Last confirmed value: 2.50% (Jan 31, 2026).' },
+  { ts: '2026-02-10 08:30', user: 'System',        role: 'Feed Monitor', action: 'Rate Entry Request',    obj: 'PNCL',      det: 'Pinnacle Financial submitted updated corporate rates for 3 plan codes. Effective Feb 1, 2026.' },
+  { ts: '2026-02-05 14:00', user: 'Rachel Torres', role: 'Rate Analyst', action: 'Rule Pre-Staged',       obj: 'TX-HB1472', det: 'TX HB 1472 penalty rule change pre-staged. Tier 2 trigger: 60 days → 45 days. Effective Mar 1, 2026.' },
+];
+
 export function getSteps(persona) {
+  if (persona.startsWith('la_')) return LA_STEPS;
   if (persona === 'analyst')   return ANALYST_STEPS;
   if (persona === 'qa')        return QA_STEPS;
   if (persona === 'cab')       return CAB_STEPS;

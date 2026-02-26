@@ -4,6 +4,7 @@ import { RECORDS, INITIAL_FACTORS, INITIAL_AUDIT } from '../data/data';
 const AppContext = createContext(null);
 
 const initialState = {
+  useCase:   'wc',
   persona:   'analyst',
   step:      0,
   phase:     'workspace',
@@ -21,6 +22,14 @@ function ts() {
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'SET_USE_CASE':
+      return {
+        ...state,
+        useCase: action.payload,
+        persona: action.payload === 'la' ? 'la_analyst' : 'analyst',
+        step: 0,
+      };
+
     case 'SET_PERSONA':
       return { ...state, persona: action.payload, step: 0 };
 

@@ -18,6 +18,8 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import RateReviewIcon from '@mui/icons-material/RateReview';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
 import { useApp } from '../context/AppContext';
 import { PERSONAS, getSteps } from '../data/data';
@@ -33,7 +35,9 @@ const ICON_MAP = {
   TaskAlt: TaskAltIcon,
   RateReview: RateReviewIcon,
   HowToReg: HowToRegIcon,
-  RocketLaunch: RocketLaunchIcon,
+  RocketLaunch:   RocketLaunchIcon,
+  AccountBalance: AccountBalanceIcon,
+  TrendingUp:     TrendingUpIcon,
 };
 
 const DRAWER_WIDTH = 220;

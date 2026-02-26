@@ -13,7 +13,6 @@ import Divider from '@mui/material/Divider';
 import Tooltip from '@mui/material/Tooltip';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
-import AppsIcon from '@mui/icons-material/Apps';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { PERSONAS } from '../data/data';
@@ -59,10 +58,29 @@ export default function Header() {
           </Box>
         </Box>
 
-        {/* Center label */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mx: 'auto' }}>
-          <AppsIcon sx={{ fontSize: 18, color: '#1B75BB' }} />
-          <Typography sx={{ fontSize: 13, fontWeight: 600, color: '#808285' }}>Rate Builder</Typography>
+        {/* Use-case switcher */}
+        <Box sx={{ mx: 'auto', display: 'flex', alignItems: 'center', p: '4px', bgcolor: '#F2F7F6', borderRadius: '10px', border: '1px solid #e0e5e4', gap: '2px' }}>
+          {[{ key: 'wc', label: "Workers' Comp" }, { key: 'la', label: 'Life & Annuity' }].map(uc => {
+            const active = state.useCase === uc.key;
+            return (
+              <Box
+                key={uc.key}
+                onClick={() => dispatch({ type: 'SET_USE_CASE', payload: uc.key })}
+                sx={{
+                  px: 2, py: 0.625, borderRadius: '7px', cursor: 'pointer',
+                  fontSize: 12, fontWeight: active ? 700 : 500,
+                  bgcolor: active ? '#fff' : 'transparent',
+                  color: active ? '#1B75BB' : '#808285',
+                  boxShadow: active ? '0 1px 4px rgba(0,0,0,.12)' : 'none',
+                  transition: 'all .15s',
+                  userSelect: 'none',
+                  '&:hover': { color: active ? '#1B75BB' : '#1a1a1a' },
+                }}
+              >
+                {uc.label}
+              </Box>
+            );
+          })}
         </Box>
 
         {/* Right controls */}
@@ -114,7 +132,7 @@ export default function Header() {
             <Typography sx={{ fontSize: 10, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '.8px', color: '#808285', px: 2, py: 1.5 }}>
               Switch Persona
             </Typography>
-            {Object.values(PERSONAS).map((p) => (
+            {Object.values(PERSONAS).filter(p => p.useCase === state.useCase).map((p) => (
               <MenuItem
                 key={p.id}
                 onClick={() => handlePersonaSwitch(p.id)}

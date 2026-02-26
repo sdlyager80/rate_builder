@@ -18,6 +18,11 @@ import ApproverReview from './views/ApproverReview';
 import ApproverDecide from './views/ApproverDecide';
 import Deploy from './views/Deploy';
 import AuditTrail from './views/AuditTrail';
+import LAQueue from './views/la/LAQueue';
+import LARateRules from './views/la/LARateRules';
+import LARateSources from './views/la/LARateSources';
+import LAImpactAnalysis from './views/la/LAImpactAnalysis';
+import LAAuditTrail from './views/la/LAAuditTrail';
 
 import { PERSONAS, getSteps } from './data/data';
 import { useApp } from './context/AppContext';
@@ -27,9 +32,10 @@ function MainContent() {
   const steps = getSteps(state.persona);
   const currentStep = steps[state.step];
   const sid = currentStep?.id || '';
+  const isLA = state.useCase === 'la';
   const isAnalystWorkbench = state.persona === 'analyst' && sid === 'workbench';
 
-  const viewMap = {
+  const wcViewMap = {
     workbench:  <Workbench />,
     workspace:  <RateWorkspace />,
     adjust:     <AdjustFactor />,
@@ -43,6 +49,16 @@ function MainContent() {
     audit:      <AuditTrail />,
   };
 
+  const laViewMap = {
+    la_queue:   <LAQueue />,
+    la_rules:   <LARateRules />,
+    la_sources: <LARateSources />,
+    la_impact:  <LAImpactAnalysis />,
+    la_audit:   <LAAuditTrail />,
+  };
+
+  const viewMap = isLA ? laViewMap : wcViewMap;
+
   return (
     <Box sx={{ flex: 1, overflowY: 'auto', p: 3, bgcolor: '#F2F7F6' }}>
       <Breadcrumbs sx={{ mb: 1.5 }}>
@@ -53,7 +69,7 @@ function MainContent() {
           {currentStep?.label || ''}
         </Typography>
       </Breadcrumbs>
-      {!isAnalystWorkbench && <PackageHeader />}
+      {!isAnalystWorkbench && !isLA && <PackageHeader />}
       {viewMap[sid] || null}
     </Box>
   );
